@@ -317,27 +317,27 @@
       const emp = allEmployees.find(e => e.id === id);
       if (!emp) return;
       const name = emp.fullName || emp.firstName + ' ' + emp.lastName;
-      document.getElementById('editName').textContent = name;
-      document.getElementById('editMsg').textContent = `You are about to edit the record for ${name}.`;
-      openModal('editModal');
-    }
-
-    function confirmEdit() {
-      closeModal('editModal');
-      showToast('warning', 'Edit Mode', 'Redirecting to the edit form...');
-      setTimeout(() => { window.location.href = 'new-contact.html'; }, 1200);
+      alert('Edit Employee: ' + name + '\nEmployee No: ' + emp.employeeNo + '\nDepartment: ' + emp.department + '\nPosition: ' + emp.position);
     }
 
     function deleteEmployee(id, name) {
-      pendingDeleteId = id;
-      document.getElementById('deleteEmpName').textContent = name;
-      openModal('deleteModal');
+      const confirmed = confirm('Are you sure you want to delete?');
+      if (!confirmed) return;
+
+      // Only delete from localStorage (can't delete defaults)
+      const saved = JSON.parse(localStorage.getItem('employees') || '[]');
+      const updatedSaved = saved.filter(e => e.id !== id);
+      localStorage.setItem('employees', JSON.stringify(updatedSaved));
+
+      allEmployees = allEmployees.filter(e => e.id !== id);
+      renderTable(allEmployees);
+      showToast('success', 'Employee Removed', name + ' has been deleted from the system.');
     }
 
+    // kept for legacy reference — no longer used by edit/delete
     document.getElementById('confirmDeleteBtn').addEventListener('click', function () {
       if (pendingDeleteId === null) return;
 
-      // Only delete from localStorage (can't delete defaults)
       const saved = JSON.parse(localStorage.getItem('employees') || '[]');
       const updatedSaved = saved.filter(e => e.id !== pendingDeleteId);
       localStorage.setItem('employees', JSON.stringify(updatedSaved));
