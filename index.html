@@ -5,18 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Employee Management System</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👥</text></svg>" />
 </head>
 <body>
 
-  <!-- NAVIGATION BAR -->
+  <!-- NAVIGATION -->
   <nav class="navbar">
     <div class="navbar-inner">
       <a href="index.html" class="navbar-brand">
-        <div class="brand-icon">👥</div>
-        <div class="brand-text">
-          <span class="brand-title">EMS</span>
-          <span class="brand-sub">Management System</span>
+        <div class="brand-logo"><i class="fa-solid fa-users"></i></div>
+        <div class="brand-text-wrap">
+          <div class="brand-name">Employee Management System</div>
+          <div class="brand-tagline">HR Portal</div>
         </div>
       </a>
 
@@ -25,128 +26,169 @@
       </button>
 
       <ul class="navbar-links" id="navLinks">
-        <li><a href="index.html" class="active"><span class="nav-icon">🏠</span> Home</a></li>
-        <li><a href="new-contact.html"><span class="nav-icon">➕</span> New Contact</a></li>
-        <li><a href="view-contacts.html"><span class="nav-icon">👁️</span> View All Contacts</a></li>
+        <li><a href="index.html" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="new-contact.html"><i class="fa-solid fa-user-plus"></i> New Contact</a></li>
+        <li><a href="view-contacts.html"><i class="fa-solid fa-address-book"></i> View All Contacts</a></li>
       </ul>
+
+      <div class="navbar-right">
+        <div class="nav-user">
+          <div class="nav-avatar">AD</div>
+          <span class="nav-user-name">Admin</span>
+        </div>
+      </div>
     </div>
   </nav>
 
-  <!-- MAIN CONTENT -->
-  <main>
+  <!-- PAGE CONTENT -->
+  <div class="page-wrap">
 
-    <!-- HERO SECTION -->
-    <section class="hero">
-      <div class="hero-badge">
-        <span>✨</span> Employee Management System v1.0
-      </div>
-      <h1>
-        Manage Your Team<br/>
-        with <span class="gradient-text">Confidence</span>
-      </h1>
-      <p>
-        A powerful, intuitive platform to manage employee contacts, departments,
-        and positions — all in one place.
-      </p>
-      <div class="hero-actions">
-        <a href="new-contact.html" class="btn btn-primary btn-lg">
-          <span>➕</span> Add New Employee
-        </a>
-        <a href="view-contacts.html" class="btn btn-secondary btn-lg">
-          <span>📋</span> View All Contacts
-        </a>
-      </div>
-    </section>
-
-    <!-- STATS DASHBOARD -->
-    <div class="stats-grid">
-      <div class="stat-card blue">
-        <div class="stat-icon">👥</div>
-        <div class="stat-info">
-          <h3 id="totalEmployees">8</h3>
-          <p>Total Employees</p>
+    <!-- HERO BANNER -->
+    <div class="hero-banner">
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <i class="fa-solid fa-circle-check"></i> Employee Management System
+        </div>
+        <h1>Manage Your Workforce<br><span>with Precision</span></h1>
+        <p>
+          A centralised platform for HR teams to manage employee records,
+          departments, and contact information — efficiently and securely.
+        </p>
+        <div class="hero-actions">
+          <a href="new-contact.html" class="btn btn-primary btn-lg">
+            <i class="fa-solid fa-user-plus"></i> Add New Employee
+          </a>
+          <a href="view-contacts.html" class="btn btn-lg" style="background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.15);">
+            <i class="fa-solid fa-address-book"></i> View Directory
+          </a>
         </div>
       </div>
-      <div class="stat-card green">
-        <div class="stat-icon">🏢</div>
-        <div class="stat-info">
+
+      <div class="hero-visual">
+        <div class="hero-card">
+          <div class="hero-card-icon blue"><i class="fa-solid fa-users"></i></div>
+          <div class="hero-card-info">
+            <div class="hero-card-num" id="totalCount">8</div>
+            <div class="hero-card-label">Total Employees</div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-icon green"><i class="fa-solid fa-building"></i></div>
+          <div class="hero-card-info">
+            <div class="hero-card-num">5</div>
+            <div class="hero-card-label">Departments</div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-icon amber"><i class="fa-solid fa-briefcase"></i></div>
+          <div class="hero-card-info">
+            <div class="hero-card-num">7</div>
+            <div class="hero-card-label">Positions</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS ROW -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-card-left">
+          <h3 id="statTotal">8</h3>
+          <p>Total Employees</p>
+          <span class="stat-card-trend"><i class="fa-solid fa-arrow-trend-up"></i> Active workforce</span>
+        </div>
+        <div class="stat-icon-wrap blue"><i class="fa-solid fa-users"></i></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-left">
           <h3>5</h3>
           <p>Departments</p>
+          <span class="stat-card-trend"><i class="fa-solid fa-building"></i> Across organisation</span>
         </div>
+        <div class="stat-icon-wrap teal"><i class="fa-solid fa-sitemap"></i></div>
       </div>
-      <div class="stat-card amber">
-        <div class="stat-icon">💼</div>
-        <div class="stat-info">
+      <div class="stat-card">
+        <div class="stat-card-left">
           <h3>7</h3>
-          <p>Positions</p>
+          <p>Job Positions</p>
+          <span class="stat-card-trend" style="color:var(--amber)"><i class="fa-solid fa-briefcase"></i> Defined roles</span>
         </div>
+        <div class="stat-icon-wrap amber"><i class="fa-solid fa-briefcase"></i></div>
       </div>
-      <div class="stat-card purple">
-        <div class="stat-icon">✅</div>
-        <div class="stat-info">
-          <h3>8</h3>
+      <div class="stat-card">
+        <div class="stat-card-left">
+          <h3 id="statActive">8</h3>
           <p>Active Staff</p>
+          <span class="stat-card-trend"><i class="fa-solid fa-circle-check"></i> Currently employed</span>
         </div>
+        <div class="stat-icon-wrap purple"><i class="fa-solid fa-user-check"></i></div>
       </div>
     </div>
 
-    <!-- FEATURES SECTION -->
-    <h2 class="section-title">🚀 Quick Actions</h2>
-    <div class="features-grid">
-      <a href="new-contact.html" class="feature-card">
-        <div class="feature-icon">➕</div>
+    <!-- QUICK ACTIONS -->
+    <div class="section-label"><i class="fa-solid fa-bolt"></i> Quick Actions</div>
+    <div class="actions-grid">
+      <a href="new-contact.html" class="action-card">
+        <div class="action-card-icon blue"><i class="fa-solid fa-user-plus"></i></div>
         <h3>Add New Employee</h3>
-        <p>Register a new employee with full contact details including name, department, position, and contact information.</p>
-        <span class="feature-link">Get started →</span>
+        <p>Register a new employee with full contact details — name, department, position, phone, and email.</p>
+        <span class="action-card-link">Get started <i class="fa-solid fa-arrow-right"></i></span>
       </a>
-      <a href="view-contacts.html" class="feature-card">
-        <div class="feature-icon">📋</div>
-        <h3>View All Contacts</h3>
-        <p>Browse and manage your entire employee directory. View details, edit records, or remove employees from the system.</p>
-        <span class="feature-link">Browse contacts →</span>
+      <a href="view-contacts.html" class="action-card">
+        <div class="action-card-icon teal"><i class="fa-solid fa-address-book"></i></div>
+        <h3>Employee Directory</h3>
+        <p>Browse and manage all employee contacts. View full details, edit records, or remove entries.</p>
+        <span class="action-card-link">Browse directory <i class="fa-solid fa-arrow-right"></i></span>
       </a>
-      <div class="feature-card" style="cursor:default;">
-        <div class="feature-icon">📊</div>
-        <h3>Department Overview</h3>
-        <p>Quickly see which departments are active and how many employees are assigned to each team across the organization.</p>
-        <span class="feature-link" style="color:var(--gray);">Coming soon</span>
+      <div class="action-card" style="cursor:default; opacity:0.7;">
+        <div class="action-card-icon purple"><i class="fa-solid fa-chart-pie"></i></div>
+        <h3>Department Analytics</h3>
+        <p>View departmental breakdowns, headcount reports, and workforce distribution across the organisation.</p>
+        <span class="action-card-link" style="color:var(--text-muted);">Coming soon</span>
       </div>
     </div>
 
-    <!-- WELCOME NOTE -->
-    <h2 class="section-title">📌 About This System</h2>
-    <div style="background:var(--white); border-radius:var(--radius-lg); padding:28px 32px; box-shadow:var(--shadow); border:1px solid var(--border); display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap;">
-      <div style="font-size:48px; flex-shrink:0;">🏛️</div>
+    <!-- ABOUT PANEL -->
+    <div class="section-label"><i class="fa-solid fa-circle-info"></i> About This System</div>
+    <div class="about-panel">
+      <div class="about-icon-wrap"><i class="fa-solid fa-building-columns"></i></div>
       <div>
-        <h3 style="font-size:18px; font-weight:700; color:var(--dark); margin-bottom:8px;">Employee Management System</h3>
-        <p style="color:var(--gray); font-size:14px; line-height:1.8; max-width:680px;">
-          Welcome to the <strong>Employee Management System</strong> — a lightweight web application built with
-          HTML, CSS, and JavaScript. This system allows HR staff and administrators to manage employee
-          contact records efficiently. Use the navigation bar above to add new contacts or browse the
-          full employee directory. All data is stored locally in your browser for a seamless offline experience.
+        <h3>Employee Management System</h3>
+        <p>
+          Welcome to the <strong>Employee Management System</strong> — a lightweight HR web application
+          built with HTML, CSS, and JavaScript. Designed for HR administrators to efficiently manage employee
+          contact records. Use the navigation bar to add new contacts or browse the full employee directory.
+          All data is persisted locally in your browser for a seamless offline experience.
         </p>
-        <div style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap;">
-          <span class="badge badge-primary">HTML5</span>
-          <span class="badge badge-success">CSS3</span>
-          <span class="badge badge-warning">JavaScript</span>
-          <span class="badge badge-primary">LocalStorage</span>
+        <div class="tag-row">
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS3</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">LocalStorage API</span>
+          <span class="tag">Responsive Design</span>
         </div>
       </div>
     </div>
 
-  </main>
+  </div><!-- /page-wrap -->
 
   <!-- FOOTER -->
-  <footer>
-    <p>&copy; 2025 <span>Employee Management System</span>. Built with HTML, CSS &amp; JavaScript.</p>
+  <footer class="site-footer">
+    <div class="footer-text">&copy; 2025 <strong>Employee Management System</strong>. Built with HTML, CSS &amp; JavaScript.</div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="new-contact.html">New Contact</a>
+      <a href="view-contacts.html">View Contacts</a>
+    </div>
   </footer>
 
   <script src="main.js"></script>
   <script>
-    // Update total count from localStorage
-    const employees = JSON.parse(localStorage.getItem('employees') || '[]');
-    const defaultCount = 8;
-    document.getElementById('totalEmployees').textContent = employees.length > 0 ? employees.length + defaultCount : defaultCount;
+    const saved = JSON.parse(localStorage.getItem('employees') || '[]');
+    const total = 8 + saved.length;
+    document.getElementById('totalCount').textContent = total;
+    document.getElementById('statTotal').textContent = total;
+    document.getElementById('statActive').textContent = total;
   </script>
 </body>
 </html>

@@ -3,20 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Add New Contact — Employee Management System</title>
+  <title>New Contact — Employee Management System</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👥</text></svg>" />
 </head>
 <body>
 
-  <!-- NAVIGATION BAR -->
+  <!-- NAVIGATION -->
   <nav class="navbar">
     <div class="navbar-inner">
       <a href="index.html" class="navbar-brand">
-        <div class="brand-icon">👥</div>
-        <div class="brand-text">
-          <span class="brand-title">EMS</span>
-          <span class="brand-sub">Management System</span>
+        <div class="brand-logo"><i class="fa-solid fa-users"></i></div>
+        <div class="brand-text-wrap">
+          <div class="brand-name">Employee Management System</div>
+          <div class="brand-tagline">HR Portal</div>
         </div>
       </a>
 
@@ -25,203 +26,264 @@
       </button>
 
       <ul class="navbar-links" id="navLinks">
-        <li><a href="index.html"><span class="nav-icon">🏠</span> Home</a></li>
-        <li><a href="new-contact.html" class="active"><span class="nav-icon">➕</span> New Contact</a></li>
-        <li><a href="view-contacts.html"><span class="nav-icon">👁️</span> View All Contacts</a></li>
+        <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="new-contact.html" class="active"><i class="fa-solid fa-user-plus"></i> New Contact</a></li>
+        <li><a href="view-contacts.html"><i class="fa-solid fa-address-book"></i> View All Contacts</a></li>
       </ul>
+
+      <div class="navbar-right">
+        <div class="nav-user">
+          <div class="nav-avatar">AD</div>
+          <span class="nav-user-name">Admin</span>
+        </div>
+      </div>
     </div>
   </nav>
 
-  <!-- MAIN CONTENT -->
-  <main>
+  <!-- PAGE CONTENT -->
+  <div class="page-wrap">
 
-    <!-- PAGE HEADER -->
     <div class="page-header">
       <div class="breadcrumb">
-        <a href="index.html">🏠 Home</a>
-        <span class="breadcrumb-sep">/</span>
+        <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+        <span class="breadcrumb-sep"><i class="fa-solid fa-chevron-right"></i></span>
         <span>New Contact</span>
       </div>
       <h1>Add New Employee</h1>
-      <p>Fill in the form below to register a new employee in the system.</p>
+      <p>Complete the form below to register a new employee in the system.</p>
     </div>
 
-    <!-- FORM CARD -->
-    <div class="form-card">
+    <div class="form-wrap">
 
-      <div class="form-card-header">
-        <div class="form-card-header-icon">📋</div>
-        <div>
-          <h2>New Employee Registration</h2>
-          <p>All fields marked with <span style="color:#f87171">*</span> are required</p>
+      <!-- MAIN FORM -->
+      <div class="card">
+        <div class="form-card-header">
+          <div class="form-header-icon"><i class="fa-solid fa-user-plus"></i></div>
+          <div>
+            <h2>New Employee Registration</h2>
+            <p>Fields marked with an asterisk (*) are required</p>
+          </div>
+        </div>
+
+        <form id="newContactForm" novalidate>
+          <div class="form-body">
+
+            <!-- PERSONAL INFORMATION -->
+            <div class="form-section">
+              <div class="form-section-title">
+                <i class="fa-solid fa-user"></i> Personal Information
+              </div>
+              <div class="form-grid">
+
+                <div class="form-group">
+                  <label for="idNumber"><i class="fa-solid fa-id-card"></i> ID Number <span class="req">*</span></label>
+                  <input type="text" id="idNumber" name="idNumber" placeholder="Enter national ID number" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="firstName"><i class="fa-solid fa-user"></i> First Name <span class="req">*</span></label>
+                  <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="lastName">Last Name <span class="req">*</span></label>
+                  <input type="text" id="lastName" name="lastName" placeholder="Enter last name" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="dob"><i class="fa-solid fa-calendar"></i> Date of Birth <span class="req">*</span></label>
+                  <input type="date" id="dob" name="dob" required />
+                </div>
+
+                <div class="form-group full">
+                  <label>Gender <span class="req">*</span></label>
+                  <div class="radio-group">
+                    <label class="radio-opt">
+                      <input type="radio" name="gender" value="Male" required /> Male
+                    </label>
+                    <label class="radio-opt">
+                      <input type="radio" name="gender" value="Female" /> Female
+                    </label>
+                    <label class="radio-opt">
+                      <input type="radio" name="gender" value="Other" /> Other
+                    </label>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- CONTACT INFORMATION -->
+            <div class="form-section">
+              <div class="form-section-title">
+                <i class="fa-solid fa-phone"></i> Contact Information
+              </div>
+              <div class="form-grid">
+
+                <div class="form-group">
+                  <label for="email"><i class="fa-solid fa-envelope"></i> Email Address <span class="req">*</span></label>
+                  <input type="email" id="email" name="email" placeholder="employee@company.com" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="phone"><i class="fa-solid fa-phone"></i> Phone Number <span class="req">*</span></label>
+                  <input type="tel" id="phone" name="phone" placeholder="+254 7XX XXX XXX" required />
+                </div>
+
+                <div class="form-group full">
+                  <label for="address"><i class="fa-solid fa-location-dot"></i> Physical Address</label>
+                  <input type="text" id="address" name="address" placeholder="Enter residential address" />
+                </div>
+
+              </div>
+            </div>
+
+            <!-- JOB INFORMATION -->
+            <div class="form-section">
+              <div class="form-section-title">
+                <i class="fa-solid fa-briefcase"></i> Job Information
+              </div>
+              <div class="form-grid">
+
+                <div class="form-group">
+                  <label for="department"><i class="fa-solid fa-building"></i> Department <span class="req">*</span></label>
+                  <select id="department" name="department" required>
+                    <option value="" disabled selected>— Select Department —</option>
+                    <option value="Human Resources">Human Resources</option>
+                    <option value="Information Technology">Information Technology</option>
+                    <option value="Finance & Accounts">Finance &amp; Accounts</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Operations">Operations</option>
+                    <option value="Legal">Legal</option>
+                    <option value="Customer Service">Customer Service</option>
+                    <option value="Administration">Administration</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="position"><i class="fa-solid fa-user-tie"></i> Position <span class="req">*</span></label>
+                  <select id="position" name="position" required>
+                    <option value="" disabled selected>— Select Position —</option>
+                    <option value="Director">Director</option>
+                    <option value="Manager">Manager</option>
+                    <option value="Team Lead">Team Lead</option>
+                    <option value="Senior Officer">Senior Officer</option>
+                    <option value="Officer">Officer</option>
+                    <option value="Junior Officer">Junior Officer</option>
+                    <option value="Analyst">Analyst</option>
+                    <option value="Intern">Intern</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="employeeNo"><i class="fa-solid fa-hashtag"></i> Employee Number</label>
+                  <input type="text" id="employeeNo" name="employeeNo" placeholder="Auto-generated if blank" />
+                </div>
+
+                <div class="form-group">
+                  <label for="startDate"><i class="fa-solid fa-calendar-check"></i> Start Date</label>
+                  <input type="date" id="startDate" name="startDate" />
+                </div>
+
+                <div class="form-group full">
+                  <label for="notes"><i class="fa-solid fa-note-sticky"></i> Additional Notes</label>
+                  <textarea id="notes" name="notes" placeholder="Any additional notes about this employee..."></textarea>
+                </div>
+
+              </div>
+            </div>
+
+          </div><!-- /form-body -->
+
+          <div class="form-footer">
+            <p class="form-note">
+              <i class="fa-solid fa-lock"></i> All information is stored locally and securely.
+            </p>
+            <div class="form-actions">
+              <button type="button" class="btn btn-secondary" onclick="resetForm()">
+                <i class="fa-solid fa-rotate-left"></i> Reset
+              </button>
+              <button type="submit" class="btn btn-primary">
+                <i class="fa-solid fa-floppy-disk"></i> Save Employee
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </div><!-- /card -->
+
+      <!-- SIDEBAR -->
+      <div class="form-sidebar">
+        <div class="sidebar-card">
+          <h4><i class="fa-solid fa-circle-info"></i> Filling Tips</h4>
+          <ul class="sidebar-tips">
+            <li><span class="tip-dot"></span> Use the employee's full legal name as it appears on their ID.</li>
+            <li><span class="tip-dot"></span> Include the country code for phone numbers (e.g. +254).</li>
+            <li><span class="tip-dot"></span> Employee numbers are auto-generated if left blank.</li>
+            <li><span class="tip-dot"></span> All required fields must be completed before saving.</li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <h4><i class="fa-solid fa-building"></i> Departments</h4>
+          <ul class="sidebar-tips">
+            <li><span class="tip-dot"></span> Human Resources</li>
+            <li><span class="tip-dot"></span> Information Technology</li>
+            <li><span class="tip-dot"></span> Finance &amp; Accounts</li>
+            <li><span class="tip-dot"></span> Marketing</li>
+            <li><span class="tip-dot"></span> Operations &amp; more</li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card" style="background:var(--blue-light); border-color:rgba(29,78,216,0.15);">
+          <h4 style="color:var(--blue);"><i class="fa-solid fa-address-book"></i> View Directory</h4>
+          <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px; line-height:1.5;">
+            After saving, the employee will appear in the contacts directory.
+          </p>
+          <a href="view-contacts.html" class="btn btn-primary btn-sm" style="width:100%; justify-content:center;">
+            <i class="fa-solid fa-arrow-right"></i> Go to Directory
+          </a>
         </div>
       </div>
 
-      <form id="newContactForm" novalidate>
-        <div class="form-body">
-
-          <!-- PERSONAL INFORMATION -->
-          <div class="form-section">
-            <div class="form-section-title">👤 Personal Information</div>
-            <div class="form-grid">
-
-              <div class="form-group">
-                <label for="idNumber">🪪 ID Number <span class="required">*</span></label>
-                <input type="text" id="idNumber" name="idNumber" placeholder="Enter national ID number" required />
-              </div>
-
-              <div class="form-group">
-                <label for="firstName">First Name <span class="required">*</span></label>
-                <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required />
-              </div>
-
-              <div class="form-group">
-                <label for="lastName">Last Name <span class="required">*</span></label>
-                <input type="text" id="lastName" name="lastName" placeholder="Enter last name" required />
-              </div>
-
-              <div class="form-group">
-                <label for="dob">📅 Date of Birth <span class="required">*</span></label>
-                <input type="date" id="dob" name="dob" required />
-              </div>
-
-              <div class="form-group full">
-                <label>⚧ Gender <span class="required">*</span></label>
-                <div class="radio-group">
-                  <label class="radio-option">
-                    <input type="radio" name="gender" value="Male" required /> Male
-                  </label>
-                  <label class="radio-option">
-                    <input type="radio" name="gender" value="Female" /> Female
-                  </label>
-                  <label class="radio-option">
-                    <input type="radio" name="gender" value="Other" /> Other
-                  </label>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- CONTACT INFORMATION -->
-          <div class="form-section">
-            <div class="form-section-title">📞 Contact Information</div>
-            <div class="form-grid">
-
-              <div class="form-group">
-                <label for="email">📧 Email Address <span class="required">*</span></label>
-                <input type="email" id="email" name="email" placeholder="employee@company.com" required />
-              </div>
-
-              <div class="form-group">
-                <label for="phone">📱 Phone Number <span class="required">*</span></label>
-                <input type="tel" id="phone" name="phone" placeholder="+254 7XX XXX XXX" required />
-              </div>
-
-              <div class="form-group full">
-                <label for="address">🏠 Physical Address</label>
-                <input type="text" id="address" name="address" placeholder="Enter residential address" />
-              </div>
-
-            </div>
-          </div>
-
-          <!-- JOB INFORMATION -->
-          <div class="form-section">
-            <div class="form-section-title">💼 Job Information</div>
-            <div class="form-grid">
-
-              <div class="form-group">
-                <label for="department">🏢 Department <span class="required">*</span></label>
-                <select id="department" name="department" required>
-                  <option value="" disabled selected>— Select Department —</option>
-                  <option value="Human Resources">Human Resources</option>
-                  <option value="Information Technology">Information Technology</option>
-                  <option value="Finance & Accounts">Finance &amp; Accounts</option>
-                  <option value="Marketing">Marketing</option>
-                  <option value="Operations">Operations</option>
-                  <option value="Legal">Legal</option>
-                  <option value="Customer Service">Customer Service</option>
-                  <option value="Administration">Administration</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="position">💼 Position <span class="required">*</span></label>
-                <select id="position" name="position" required>
-                  <option value="" disabled selected>— Select Position —</option>
-                  <option value="Manager">Manager</option>
-                  <option value="Senior Officer">Senior Officer</option>
-                  <option value="Officer">Officer</option>
-                  <option value="Junior Officer">Junior Officer</option>
-                  <option value="Team Lead">Team Lead</option>
-                  <option value="Director">Director</option>
-                  <option value="Analyst">Analyst</option>
-                  <option value="Intern">Intern</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="employeeNo">🔢 Employee Number</label>
-                <input type="text" id="employeeNo" name="employeeNo" placeholder="Auto-generated if left blank" />
-              </div>
-
-              <div class="form-group">
-                <label for="startDate">📅 Start Date</label>
-                <input type="date" id="startDate" name="startDate" />
-              </div>
-
-              <div class="form-group full">
-                <label for="notes">📝 Additional Notes</label>
-                <textarea id="notes" name="notes" placeholder="Any additional information about this employee..."></textarea>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-
-        <!-- FORM FOOTER -->
-        <div class="form-footer">
-          <p class="form-footer-note">
-            🔒 All information is stored securely and locally.
-          </p>
-          <div class="form-footer-actions">
-            <button type="button" class="btn btn-secondary" onclick="resetForm()">
-              🔄 Reset Form
-            </button>
-            <button type="submit" class="btn btn-primary">
-              💾 Save Employee
-            </button>
-          </div>
-        </div>
-
-      </form>
-    </div><!-- /form-card -->
-
-  </main>
+    </div><!-- /form-wrap -->
+  </div><!-- /page-wrap -->
 
   <!-- SUCCESS MODAL -->
   <div class="modal-overlay" id="successModal">
     <div class="modal">
       <div class="modal-header">
-        <h3>✅ Employee Saved</h3>
-        <button class="modal-close" onclick="closeSuccessModal()">✕</button>
+        <h3><i class="fa-solid fa-circle-check" style="color:var(--green)"></i> Employee Registered</h3>
+        <button class="modal-close" onclick="closeSuccessModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
-      <div class="modal-body" style="text-align:center; padding: 32px 24px;">
-        <div style="font-size:64px; margin-bottom:16px;">🎉</div>
-        <h4 style="font-size:20px; font-weight:700; color:var(--dark); margin-bottom:8px;">Employee Added Successfully!</h4>
-        <p style="color:var(--gray); font-size:14px;" id="successMessage">The new employee has been registered in the system.</p>
+      <div class="modal-body" style="text-align:center; padding:28px 22px;">
+        <div style="width:64px;height:64px;background:var(--green-light);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:26px;color:var(--green);">
+          <i class="fa-solid fa-user-check"></i>
+        </div>
+        <h4 style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:8px;">Employee Added Successfully</h4>
+        <p style="color:var(--text-muted);font-size:13.5px;line-height:1.6;" id="successMessage">The new employee has been registered in the system.</p>
       </div>
-      <div class="modal-footer" style="justify-content:center; gap:12px;">
-        <button class="btn btn-secondary" onclick="closeSuccessModal()">Add Another</button>
-        <a href="view-contacts.html" class="btn btn-primary">View All Contacts →</a>
+      <div class="modal-footer" style="justify-content:center;">
+        <button class="btn btn-secondary" onclick="closeSuccessModal()">
+          <i class="fa-solid fa-plus"></i> Add Another
+        </button>
+        <a href="view-contacts.html" class="btn btn-primary">
+          <i class="fa-solid fa-address-book"></i> View Directory
+        </a>
       </div>
     </div>
   </div>
 
-  <!-- TOAST CONTAINER -->
   <div id="toast-container"></div>
+
+  <footer class="site-footer">
+    <div class="footer-text">&copy; 2025 <strong>Employee Management System</strong>. Built with HTML, CSS &amp; JavaScript.</div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="new-contact.html">New Contact</a>
+      <a href="view-contacts.html">View Contacts</a>
+    </div>
+  </footer>
 
   <script src="main.js"></script>
   <script>
@@ -230,15 +292,14 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      // Basic validation
-      const required = form.querySelectorAll('[required]');
+      const requiredFields = form.querySelectorAll('[required]');
       let valid = true;
 
-      required.forEach(field => {
-        if (field.type === 'radio') return; // handled separately
+      requiredFields.forEach(field => {
+        if (field.type === 'radio') return;
         if (!field.value.trim()) {
-          field.style.borderColor = 'var(--danger)';
-          field.style.boxShadow = '0 0 0 3px rgba(239,68,68,0.15)';
+          field.style.borderColor = 'var(--red)';
+          field.style.boxShadow = '0 0 0 3px rgba(220,38,38,0.1)';
           valid = false;
         } else {
           field.style.borderColor = '';
@@ -246,7 +307,6 @@
         }
       });
 
-      // Check gender radio
       const genderSelected = form.querySelector('input[name="gender"]:checked');
       if (!genderSelected) {
         valid = false;
@@ -255,43 +315,40 @@
       }
 
       if (!valid) {
-        showToast('error', 'Validation Error', 'Please fill in all required fields.');
+        showToast('error', 'Validation Error', 'Please complete all required fields.');
         return;
       }
 
-      // Build employee object
       const employee = {
         id: Date.now(),
-        idNumber: document.getElementById('idNumber').value.trim(),
-        firstName: document.getElementById('firstName').value.trim(),
-        lastName: document.getElementById('lastName').value.trim(),
-        fullName: document.getElementById('firstName').value.trim() + ' ' + document.getElementById('lastName').value.trim(),
-        dob: document.getElementById('dob').value,
-        gender: genderSelected.value,
-        email: document.getElementById('email').value.trim(),
-        phone: document.getElementById('phone').value.trim(),
-        address: document.getElementById('address').value.trim(),
+        idNumber:   document.getElementById('idNumber').value.trim(),
+        firstName:  document.getElementById('firstName').value.trim(),
+        lastName:   document.getElementById('lastName').value.trim(),
+        fullName:   document.getElementById('firstName').value.trim() + ' ' + document.getElementById('lastName').value.trim(),
+        dob:        document.getElementById('dob').value,
+        gender:     genderSelected.value,
+        email:      document.getElementById('email').value.trim(),
+        phone:      document.getElementById('phone').value.trim(),
+        address:    document.getElementById('address').value.trim(),
         department: document.getElementById('department').value,
-        position: document.getElementById('position').value,
+        position:   document.getElementById('position').value,
         employeeNo: document.getElementById('employeeNo').value.trim() || 'EMP-' + String(Date.now()).slice(-5),
-        startDate: document.getElementById('startDate').value,
-        notes: document.getElementById('notes').value.trim(),
-        status: 'Active'
+        startDate:  document.getElementById('startDate').value,
+        notes:      document.getElementById('notes').value.trim(),
+        status:     'Active'
       };
 
-      // Save to localStorage
       const employees = JSON.parse(localStorage.getItem('employees') || '[]');
       employees.push(employee);
       localStorage.setItem('employees', JSON.stringify(employees));
 
       document.getElementById('successMessage').textContent =
-        `${employee.fullName} has been successfully registered as ${employee.position} in ${employee.department}.`;
+        employee.fullName + ' has been registered as ' + employee.position + ' in ' + employee.department + '.';
 
       document.getElementById('successModal').classList.add('show');
       form.reset();
     });
 
-    // Live validation feedback
     form.querySelectorAll('input, select, textarea').forEach(field => {
       field.addEventListener('input', function () {
         if (this.value.trim()) {
@@ -307,7 +364,7 @@
         f.style.borderColor = '';
         f.style.boxShadow = '';
       });
-      showToast('warning', 'Form Reset', 'All fields have been cleared.');
+      showToast('warning', 'Form Cleared', 'All fields have been reset.');
     }
 
     function closeSuccessModal() {

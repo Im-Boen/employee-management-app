@@ -5,18 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>View All Contacts — Employee Management System</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👥</text></svg>" />
 </head>
 <body>
 
-  <!-- NAVIGATION BAR -->
+  <!-- NAVIGATION -->
   <nav class="navbar">
     <div class="navbar-inner">
       <a href="index.html" class="navbar-brand">
-        <div class="brand-icon">👥</div>
-        <div class="brand-text">
-          <span class="brand-title">EMS</span>
-          <span class="brand-sub">Management System</span>
+        <div class="brand-logo"><i class="fa-solid fa-users"></i></div>
+        <div class="brand-text-wrap">
+          <div class="brand-name">Employee Management System</div>
+          <div class="brand-tagline">HR Portal</div>
         </div>
       </a>
 
@@ -25,35 +26,41 @@
       </button>
 
       <ul class="navbar-links" id="navLinks">
-        <li><a href="index.html"><span class="nav-icon">🏠</span> Home</a></li>
-        <li><a href="new-contact.html"><span class="nav-icon">➕</span> New Contact</a></li>
-        <li><a href="view-contacts.html" class="active"><span class="nav-icon">👁️</span> View All Contacts</a></li>
+        <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="new-contact.html"><i class="fa-solid fa-user-plus"></i> New Contact</a></li>
+        <li><a href="view-contacts.html" class="active"><i class="fa-solid fa-address-book"></i> View All Contacts</a></li>
       </ul>
+
+      <div class="navbar-right">
+        <div class="nav-user">
+          <div class="nav-avatar">AD</div>
+          <span class="nav-user-name">Admin</span>
+        </div>
+      </div>
     </div>
   </nav>
 
-  <!-- MAIN CONTENT -->
-  <main>
+  <!-- PAGE CONTENT -->
+  <div class="page-wrap">
 
-    <!-- PAGE HEADER -->
     <div class="page-header">
       <div class="breadcrumb">
-        <a href="index.html">🏠 Home</a>
-        <span class="breadcrumb-sep">/</span>
+        <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+        <span class="breadcrumb-sep"><i class="fa-solid fa-chevron-right"></i></span>
         <span>View All Contacts</span>
       </div>
       <h1>Employee Directory</h1>
-      <p>Browse, search, and manage all registered employee contacts.</p>
+      <p>Browse, search, and manage all registered employee records.</p>
     </div>
 
-    <!-- TABLE TOOLBAR -->
-    <div class="table-toolbar">
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" placeholder="Search by name, email, or department..." oninput="filterTable()" />
-      </div>
-      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-        <select id="deptFilter" onchange="filterTable()" style="padding:9px 14px; border:1.5px solid var(--border); border-radius:var(--radius-sm); font-size:13px; font-family:inherit; color:var(--dark); background:var(--white); cursor:pointer; outline:none;">
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <div class="search-field">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="searchInput" placeholder="Search name, email, department..." oninput="filterTable()" />
+        </div>
+        <select id="deptFilter" class="filter-select" onchange="filterTable()">
           <option value="">All Departments</option>
           <option value="Human Resources">Human Resources</option>
           <option value="Information Technology">Information Technology</option>
@@ -62,22 +69,31 @@
           <option value="Operations">Operations</option>
           <option value="Customer Service">Customer Service</option>
           <option value="Administration">Administration</option>
+          <option value="Legal">Legal</option>
         </select>
+      </div>
+      <div class="toolbar-right">
+        <span class="badge badge-green" id="activeBadge">
+          <i class="fa-solid fa-circle-check"></i> Active: <span id="activeCount">0</span>
+        </span>
         <a href="new-contact.html" class="btn btn-primary">
-          <span>➕</span> Add Employee
+          <i class="fa-solid fa-user-plus"></i> Add Employee
         </a>
       </div>
     </div>
 
     <!-- TABLE CARD -->
-    <div class="table-card">
-      <div class="table-card-header">
-        <div class="table-title">
-          👥 All Employees
-          <span class="badge badge-primary" id="countBadge">Loading...</span>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <i class="fa-solid fa-table-list"></i>
+          All Employees
+          <span class="badge badge-blue" id="countBadge">Loading...</span>
         </div>
-        <div style="display:flex; gap:8px;">
-          <span class="badge badge-success">✅ Active: <span id="activeCount">0</span></span>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <button class="btn btn-ghost btn-sm" onclick="loadEmployees()" title="Refresh">
+            <i class="fa-solid fa-arrows-rotate"></i> Refresh
+          </button>
         </div>
       </div>
 
@@ -85,129 +101,86 @@
         <table id="employeeTable">
           <thead>
             <tr>
-              <th>#</th>
+              <th style="width:40px;">#</th>
               <th>Employee</th>
               <th>Phone</th>
               <th>Email</th>
               <th>Department</th>
               <th>Position</th>
               <th>Status</th>
-              <th>Actions</th>
+              <th style="width:200px;">Actions</th>
             </tr>
           </thead>
-          <tbody id="tableBody">
-            <!-- Rows injected by JS -->
-          </tbody>
+          <tbody id="tableBody"></tbody>
         </table>
       </div>
 
-      <div class="table-footer">
-        <p class="table-info" id="tableInfo">Showing all employees</p>
+      <div class="table-footer-bar">
+        <span class="table-info-text" id="tableInfo">Loading employees...</span>
         <div class="pagination" id="pagination"></div>
       </div>
     </div>
 
-  </main>
+  </div><!-- /page-wrap -->
 
-  <!-- ===== DETAILS MODAL ===== -->
+  <!-- DETAILS MODAL -->
   <div class="modal-overlay" id="detailsModal">
-    <div class="modal" style="max-width:580px;">
+    <div class="modal" style="max-width:560px;">
       <div class="modal-header">
-        <h3>👤 Employee Details</h3>
-        <button class="modal-close" onclick="closeModal('detailsModal')">✕</button>
+        <h3><i class="fa-solid fa-user"></i> Employee Details</h3>
+        <button class="modal-close" onclick="closeModal('detailsModal')"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="modal-body">
-        <div class="detail-profile" id="detailProfile">
+        <div class="detail-banner">
           <div class="detail-avatar" id="detailAvatar">JD</div>
           <div>
-            <div class="detail-name" id="detailName">John Doe</div>
-            <div class="detail-position" id="detailPos">Manager — Human Resources</div>
+            <div class="detail-emp-name" id="detailName">—</div>
+            <div class="detail-emp-role" id="detailRole">—</div>
           </div>
         </div>
-        <div class="detail-grid" id="detailGrid">
-          <!-- Populated by JS -->
-        </div>
+        <div class="detail-grid" id="detailGrid"></div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-secondary" onclick="closeModal('detailsModal')">Close</button>
-        <button class="btn btn-primary" onclick="closeModal('detailsModal')">✅ Done</button>
+        <button class="btn btn-secondary" onclick="closeModal('detailsModal')">
+          <i class="fa-solid fa-xmark"></i> Close
+        </button>
+        <button class="btn btn-primary" onclick="closeModal('detailsModal')">
+          <i class="fa-solid fa-check"></i> Done
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- ===== EDIT MODAL ===== -->
-  <div class="modal-overlay" id="editModal">
-    <div class="modal" style="max-width:480px;">
-      <div class="modal-header">
-        <h3>✏️ Edit Employee</h3>
-        <button class="modal-close" onclick="closeModal('editModal')">✕</button>
-      </div>
-      <div class="modal-body">
-        <div style="text-align:center; padding:10px 0 20px;">
-          <div style="font-size:52px; margin-bottom:12px;">✏️</div>
-          <h4 style="font-size:17px; font-weight:700; color:var(--dark); margin-bottom:8px;">Edit Employee Record</h4>
-          <p style="color:var(--gray); font-size:14px;" id="editMsg">You are editing this employee's details.</p>
-        </div>
-        <div style="background:var(--bg); border-radius:var(--radius); padding:16px; border:1px solid var(--border);">
-          <p style="font-size:13px; color:var(--gray); text-align:center;">
-            ℹ️ Full editing is available in the <a href="new-contact.html" style="color:var(--primary); font-weight:600;">New Contact</a> form. This confirms you want to edit <strong id="editName">this employee</strong>.
-          </p>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" onclick="closeModal('editModal')">Cancel</button>
-        <button class="btn btn-warning" onclick="confirmEdit()">✏️ Confirm Edit</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== DELETE CONFIRM MODAL ===== -->
-  <div class="modal-overlay" id="deleteModal">
-    <div class="modal" style="max-width:440px;">
-      <div class="modal-header">
-        <h3>🗑️ Confirm Delete</h3>
-        <button class="modal-close" onclick="closeModal('deleteModal')">✕</button>
-      </div>
-      <div class="modal-body">
-        <div class="confirm-icon">🗑️</div>
-        <div class="confirm-text">
-          <h4>Are you sure you want to delete?</h4>
-          <p>You are about to remove <strong id="deleteEmpName">this employee</strong> from the system. This action cannot be undone.</p>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" onclick="closeModal('deleteModal')">Cancel</button>
-        <button class="btn btn-danger" id="confirmDeleteBtn">🗑️ Yes, Delete</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- TOAST -->
   <div id="toast-container"></div>
+
+  <footer class="site-footer">
+    <div class="footer-text">&copy; 2025 <strong>Employee Management System</strong>. Built with HTML, CSS &amp; JavaScript.</div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="new-contact.html">New Contact</a>
+      <a href="view-contacts.html">View Contacts</a>
+    </div>
+  </footer>
 
   <script src="main.js"></script>
   <script>
-    // =============================================
-    // DEFAULT SAMPLE DATA
-    // =============================================
     const defaultEmployees = [
-      { id: 1, idNumber: 'KE001', firstName: 'Ann', lastName: 'Mutiga', fullName: 'Ann Mutiga', dob: '1990-04-12', gender: 'Female', email: 'ann.mutiga@company.com', phone: '+254 712 345 678', address: 'Nairobi, Kenya', department: 'Human Resources', position: 'Manager', employeeNo: 'EMP-00001', startDate: '2018-03-01', notes: '', status: 'Active' },
-      { id: 2, idNumber: 'KE002', firstName: 'Carren', lastName: 'Nyaboke', fullName: 'Carren Nyaboke', dob: '1992-07-22', gender: 'Female', email: 'carren.nyaboke@company.com', phone: '+254 723 456 789', address: 'Mombasa, Kenya', department: 'Information Technology', position: 'Senior Officer', employeeNo: 'EMP-00002', startDate: '2019-06-15', notes: '', status: 'Active' },
-      { id: 3, idNumber: 'KE003', firstName: 'Cecilia', lastName: 'Nyokabi', fullName: 'Cecilia Nyokabi', dob: '1988-11-05', gender: 'Female', email: 'cecilia.nyokabi@company.com', phone: '+254 734 567 890', address: 'Kisumu, Kenya', department: 'Finance & Accounts', position: 'Officer', employeeNo: 'EMP-00003', startDate: '2017-01-20', notes: '', status: 'Active' },
-      { id: 4, idNumber: 'KE004', firstName: 'Charles', lastName: 'Onyango', fullName: 'Charles Onyango', dob: '1985-02-14', gender: 'Male', email: 'charles.onyango@company.com', phone: '+254 745 678 901', address: 'Nakuru, Kenya', department: 'Marketing', position: 'Director', employeeNo: 'EMP-00004', startDate: '2015-09-01', notes: '', status: 'Active' },
-      { id: 5, idNumber: 'KE005', firstName: 'Christine', lastName: 'Mogeni', fullName: 'Christine Mogeni', dob: '1994-09-30', gender: 'Female', email: 'christine.mogeni@company.com', phone: '+254 756 789 012', address: 'Eldoret, Kenya', department: 'Operations', position: 'Team Lead', employeeNo: 'EMP-00005', startDate: '2020-02-10', notes: '', status: 'Active' },
-      { id: 6, idNumber: 'KE006', firstName: 'David', lastName: 'Kamau', fullName: 'David Kamau', dob: '1991-06-18', gender: 'Male', email: 'david.kamau@company.com', phone: '+254 767 890 123', address: 'Nairobi, Kenya', department: 'Information Technology', position: 'Analyst', employeeNo: 'EMP-00006', startDate: '2021-07-05', notes: '', status: 'Active' },
-      { id: 7, idNumber: 'KE007', firstName: 'Faith', lastName: 'Wanjiru', fullName: 'Faith Wanjiru', dob: '1993-03-08', gender: 'Female', email: 'faith.wanjiru@company.com', phone: '+254 778 901 234', address: 'Thika, Kenya', department: 'Customer Service', position: 'Officer', employeeNo: 'EMP-00007', startDate: '2022-01-17', notes: '', status: 'Active' },
-      { id: 8, idNumber: 'KE008', firstName: 'George', lastName: 'Ochieng', fullName: 'George Ochieng', dob: '1987-12-25', gender: 'Male', email: 'george.ochieng@company.com', phone: '+254 789 012 345', address: 'Kisumu, Kenya', department: 'Administration', position: 'Senior Officer', employeeNo: 'EMP-00008', startDate: '2016-11-30', notes: '', status: 'Active' }
+      { id:1, idNumber:'KE001', firstName:'Ann',      lastName:'Mutiga',         fullName:'Ann Mutiga',         dob:'1990-04-12', gender:'Female', email:'ann.mutiga@company.com',       phone:'+254 712 345 678', address:'Nairobi, Kenya',  department:'Human Resources',       position:'Manager',       employeeNo:'EMP-00001', startDate:'2018-03-01', notes:'', status:'Active' },
+      { id:2, idNumber:'KE002', firstName:'Carren',   lastName:'Nyaboke',        fullName:'Carren Nyaboke',     dob:'1992-07-22', gender:'Female', email:'carren.nyaboke@company.com',    phone:'+254 723 456 789', address:'Mombasa, Kenya',  department:'Information Technology', position:'Senior Officer',employeeNo:'EMP-00002', startDate:'2019-06-15', notes:'', status:'Active' },
+      { id:3, idNumber:'KE003', firstName:'Cecilia',  lastName:'Nyokabi',        fullName:'Cecilia Nyokabi',    dob:'1988-11-05', gender:'Female', email:'cecilia.nyokabi@company.com',   phone:'+254 734 567 890', address:'Kisumu, Kenya',   department:'Finance & Accounts',    position:'Officer',       employeeNo:'EMP-00003', startDate:'2017-01-20', notes:'', status:'Active' },
+      { id:4, idNumber:'KE004', firstName:'Charles',  lastName:'Onyango',        fullName:'Charles Onyango',    dob:'1985-02-14', gender:'Male',   email:'charles.onyango@company.com',   phone:'+254 745 678 901', address:'Nakuru, Kenya',   department:'Marketing',             position:'Director',      employeeNo:'EMP-00004', startDate:'2015-09-01', notes:'', status:'Active' },
+      { id:5, idNumber:'KE005', firstName:'Christine',lastName:'Mogeni',         fullName:'Christine Mogeni',   dob:'1994-09-30', gender:'Female', email:'christine.mogeni@company.com',  phone:'+254 756 789 012', address:'Eldoret, Kenya',  department:'Operations',            position:'Team Lead',     employeeNo:'EMP-00005', startDate:'2020-02-10', notes:'', status:'Active' },
+      { id:6, idNumber:'KE006', firstName:'David',    lastName:'Kamau',          fullName:'David Kamau',        dob:'1991-06-18', gender:'Male',   email:'david.kamau@company.com',       phone:'+254 767 890 123', address:'Nairobi, Kenya',  department:'Information Technology', position:'Analyst',       employeeNo:'EMP-00006', startDate:'2021-07-05', notes:'', status:'Active' },
+      { id:7, idNumber:'KE007', firstName:'Faith',    lastName:'Wanjiru',        fullName:'Faith Wanjiru',      dob:'1993-03-08', gender:'Female', email:'faith.wanjiru@company.com',     phone:'+254 778 901 234', address:'Thika, Kenya',    department:'Customer Service',      position:'Officer',       employeeNo:'EMP-00007', startDate:'2022-01-17', notes:'', status:'Active' },
+      { id:8, idNumber:'KE008', firstName:'George',   lastName:'Ochieng',        fullName:'George Ochieng',     dob:'1987-12-25', gender:'Male',   email:'george.ochieng@company.com',    phone:'+254 789 012 345', address:'Kisumu, Kenya',   department:'Administration',        position:'Senior Officer',employeeNo:'EMP-00008', startDate:'2016-11-30', notes:'', status:'Active' }
     ];
 
-    const avatarClasses = ['avatar-1','avatar-2','avatar-3','avatar-4','avatar-5','avatar-6','avatar-7','avatar-8'];
-    let pendingDeleteId = null;
+    const avClasses = ['av-1','av-2','av-3','av-4','av-5','av-6','av-7','av-8'];
     let allEmployees = [];
 
-    function getAvatarInitials(name) {
-      const parts = name.trim().split(' ');
-      return (parts[0][0] + (parts[1] ? parts[1][0] : '')).toUpperCase();
+    function initials(name) {
+      const p = name.trim().split(' ');
+      return (p[0][0] + (p[1] ? p[1][0] : '')).toUpperCase();
     }
 
     function loadEmployees() {
@@ -218,59 +191,66 @@
 
     function renderTable(data) {
       const tbody = document.getElementById('tableBody');
-      document.getElementById('countBadge').textContent = data.length + ' Total';
-      document.getElementById('activeCount').textContent = data.filter(e => e.status === 'Active').length;
-      document.getElementById('tableInfo').textContent = `Showing ${data.length} employee${data.length !== 1 ? 's' : ''}`;
+      const active = data.filter(e => e.status === 'Active').length;
+
+      document.getElementById('countBadge').textContent  = data.length + ' Total';
+      document.getElementById('activeCount').textContent = active;
+      document.getElementById('tableInfo').textContent   =
+        'Showing ' + data.length + ' employee' + (data.length !== 1 ? 's' : '');
 
       if (data.length === 0) {
         tbody.innerHTML = `
-          <tr>
-            <td colspan="8">
-              <div class="empty-state">
-                <div class="empty-icon">👤</div>
-                <h3>No employees found</h3>
-                <p>Try adjusting your search or add a new employee.</p>
-                <a href="new-contact.html" class="btn btn-primary">➕ Add Employee</a>
-              </div>
-            </td>
-          </tr>`;
+          <tr><td colspan="8">
+            <div class="empty-state">
+              <div class="empty-state-icon"><i class="fa-solid fa-users-slash"></i></div>
+              <h3>No employees found</h3>
+              <p>Try a different search term or add a new employee.</p>
+              <a href="new-contact.html" class="btn btn-primary">
+                <i class="fa-solid fa-user-plus"></i> Add Employee
+              </a>
+            </div>
+          </td></tr>`;
         return;
       }
 
       tbody.innerHTML = data.map((emp, i) => {
-        const avatarClass = avatarClasses[i % avatarClasses.length];
-        const initials = getAvatarInitials(emp.fullName || emp.firstName + ' ' + emp.lastName);
+        const av    = avClasses[i % avClasses.length];
+        const init  = initials(emp.fullName || emp.firstName + ' ' + emp.lastName);
+        const name  = emp.fullName || emp.firstName + ' ' + emp.lastName;
+        const safeName = name.replace(/'/g, "\\'");
         return `
           <tr>
-            <td style="color:var(--gray); font-size:13px; font-weight:600;">${i + 1}</td>
+            <td style="color:var(--text-faint);font-size:12.5px;font-weight:600;">${i + 1}</td>
             <td>
-              <div class="employee-cell">
-                <div class="avatar ${avatarClass}">${initials}</div>
+              <div class="emp-cell">
+                <div class="avatar ${av}">${init}</div>
                 <div>
-                  <div class="employee-name">${emp.fullName || emp.firstName + ' ' + emp.lastName}</div>
-                  <div class="employee-id">${emp.employeeNo}</div>
+                  <div class="emp-name">${name}</div>
+                  <div class="emp-id">${emp.employeeNo}</div>
                 </div>
               </div>
             </td>
-            <td style="font-size:13px;">${emp.phone}</td>
+            <td style="font-size:13px;color:var(--text-2);">${emp.phone}</td>
+            <td style="font-size:13px;color:var(--text-muted);">${emp.email}</td>
+            <td><span class="dept-pill">${emp.department}</span></td>
+            <td style="font-size:13px;font-weight:500;color:var(--text-2);">${emp.position}</td>
             <td>
-              <div class="contact-info">
-                <div class="contact-email">${emp.email}</div>
-              </div>
-            </td>
-            <td><span class="dept-badge">${emp.department}</span></td>
-            <td style="font-size:13px; font-weight:500;">${emp.position}</td>
-            <td>
-              <span class="badge ${emp.status === 'Active' ? 'badge-success' : 'badge-danger'}">
-                <span class="status-dot ${emp.status === 'Active' ? 'status-active' : 'status-inactive'}"></span>
+              <span class="status-pill ${emp.status === 'Active' ? 'active' : 'inactive'}">
+                <span class="status-dot ${emp.status === 'Active' ? 'active' : 'inactive'}"></span>
                 ${emp.status}
               </span>
             </td>
             <td>
               <div class="actions-cell">
-                <button class="btn btn-info btn-sm" onclick="viewDetails(${emp.id})">👁 Details</button>
-                <button class="btn btn-warning btn-sm" onclick="editEmployee(${emp.id})">✏️ Edit</button>
-                <button class="btn btn-danger btn-sm" onclick="deleteEmployee(${emp.id}, '${(emp.fullName || emp.firstName + ' ' + emp.lastName).replace(/'/g,"\\'")}')">🗑️ Delete</button>
+                <button class="btn btn-teal btn-sm"    onclick="viewDetails(${emp.id})">
+                  <i class="fa-solid fa-eye"></i> Details
+                </button>
+                <button class="btn btn-warning btn-sm" onclick="editEmployee(${emp.id})">
+                  <i class="fa-solid fa-pen"></i> Edit
+                </button>
+                <button class="btn btn-danger btn-sm"  onclick="deleteEmployee(${emp.id}, '${safeName}')">
+                  <i class="fa-solid fa-trash"></i> Delete
+                </button>
               </div>
             </td>
           </tr>`;
@@ -278,37 +258,38 @@
     }
 
     function filterTable() {
-      const query = document.getElementById('searchInput').value.toLowerCase();
+      const q    = document.getElementById('searchInput').value.toLowerCase();
       const dept = document.getElementById('deptFilter').value;
-      const filtered = allEmployees.filter(emp => {
+      const out  = allEmployees.filter(emp => {
         const name = (emp.fullName || emp.firstName + ' ' + emp.lastName).toLowerCase();
-        const matchSearch = !query || name.includes(query) || emp.email.toLowerCase().includes(query) || emp.department.toLowerCase().includes(query) || emp.phone.includes(query);
-        const matchDept = !dept || emp.department === dept;
-        return matchSearch && matchDept;
+        const ms   = !q || name.includes(q) || emp.email.toLowerCase().includes(q) ||
+                     emp.department.toLowerCase().includes(q) || emp.phone.includes(q);
+        const md   = !dept || emp.department === dept;
+        return ms && md;
       });
-      renderTable(filtered);
+      renderTable(out);
     }
 
     function viewDetails(id) {
       const emp = allEmployees.find(e => e.id === id);
       if (!emp) return;
-      const initials = getAvatarInitials(emp.fullName || emp.firstName + ' ' + emp.lastName);
-      document.getElementById('detailAvatar').textContent = initials;
-      document.getElementById('detailName').textContent = emp.fullName || emp.firstName + ' ' + emp.lastName;
-      document.getElementById('detailPos').textContent = emp.position + ' — ' + emp.department;
+      const name = emp.fullName || emp.firstName + ' ' + emp.lastName;
+      document.getElementById('detailAvatar').textContent = initials(name);
+      document.getElementById('detailName').textContent   = name;
+      document.getElementById('detailRole').textContent   = emp.position + '  —  ' + emp.department;
       document.getElementById('detailGrid').innerHTML = `
         <div class="detail-item"><label>Employee No.</label><p>${emp.employeeNo}</p></div>
         <div class="detail-item"><label>ID Number</label><p>${emp.idNumber}</p></div>
         <div class="detail-item"><label>Gender</label><p>${emp.gender}</p></div>
-        <div class="detail-item"><label>Date of Birth</label><p>${emp.dob || 'N/A'}</p></div>
-        <div class="detail-item"><label>Email</label><p>${emp.email}</p></div>
-        <div class="detail-item"><label>Phone</label><p>${emp.phone}</p></div>
+        <div class="detail-item"><label>Date of Birth</label><p>${emp.dob || '—'}</p></div>
+        <div class="detail-item"><label>Email Address</label><p>${emp.email}</p></div>
+        <div class="detail-item"><label>Phone Number</label><p>${emp.phone}</p></div>
         <div class="detail-item"><label>Department</label><p>${emp.department}</p></div>
         <div class="detail-item"><label>Position</label><p>${emp.position}</p></div>
-        <div class="detail-item"><label>Start Date</label><p>${emp.startDate || 'N/A'}</p></div>
+        <div class="detail-item"><label>Start Date</label><p>${emp.startDate || '—'}</p></div>
         <div class="detail-item"><label>Status</label><p>${emp.status}</p></div>
-        <div class="detail-item" style="grid-column:1/-1"><label>Address</label><p>${emp.address || 'N/A'}</p></div>
-        ${emp.notes ? `<div class="detail-item" style="grid-column:1/-1"><label>Notes</label><p>${emp.notes}</p></div>` : ''}
+        <div class="detail-item full"><label>Address</label><p>${emp.address || '—'}</p></div>
+        ${emp.notes ? `<div class="detail-item full"><label>Notes</label><p>${emp.notes}</p></div>` : ''}
       `;
       openModal('detailsModal');
     }
@@ -324,49 +305,24 @@
       const confirmed = confirm('Are you sure you want to delete?');
       if (!confirmed) return;
 
-      // Only delete from localStorage (can't delete defaults)
-      const saved = JSON.parse(localStorage.getItem('employees') || '[]');
-      const updatedSaved = saved.filter(e => e.id !== id);
-      localStorage.setItem('employees', JSON.stringify(updatedSaved));
+      const saved    = JSON.parse(localStorage.getItem('employees') || '[]');
+      const updated  = saved.filter(e => e.id !== id);
+      localStorage.setItem('employees', JSON.stringify(updated));
 
       allEmployees = allEmployees.filter(e => e.id !== id);
       renderTable(allEmployees);
       showToast('success', 'Employee Removed', name + ' has been deleted from the system.');
     }
 
-    // kept for legacy reference — no longer used by edit/delete
-    document.getElementById('confirmDeleteBtn').addEventListener('click', function () {
-      if (pendingDeleteId === null) return;
+    function openModal(id)  { document.getElementById(id).classList.add('show'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('show'); }
 
-      const saved = JSON.parse(localStorage.getItem('employees') || '[]');
-      const updatedSaved = saved.filter(e => e.id !== pendingDeleteId);
-      localStorage.setItem('employees', JSON.stringify(updatedSaved));
-
-      // Remove from allEmployees display
-      allEmployees = allEmployees.filter(e => e.id !== pendingDeleteId);
-      renderTable(allEmployees);
-
-      closeModal('deleteModal');
-      pendingDeleteId = null;
-      showToast('success', 'Employee Removed', 'The employee has been deleted from the system.');
-    });
-
-    function openModal(id) {
-      document.getElementById(id).classList.add('show');
-    }
-
-    function closeModal(id) {
-      document.getElementById(id).classList.remove('show');
-    }
-
-    // Close modals on backdrop click
     document.querySelectorAll('.modal-overlay').forEach(overlay => {
       overlay.addEventListener('click', function (e) {
         if (e.target === this) this.classList.remove('show');
       });
     });
 
-    // Load on start
     loadEmployees();
   </script>
 </body>
