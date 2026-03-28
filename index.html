@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Employee Management System</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👥</text></svg>" />
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-brand">
+        <div class="brand-icon">👥</div>
+        <div class="brand-text">
+          <span class="brand-title">EMS</span>
+          <span class="brand-sub">Management System</span>
+        </div>
+      </a>
+
+      <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="navbar-links" id="navLinks">
+        <li><a href="index.html" class="active"><span class="nav-icon">🏠</span> Home</a></li>
+        <li><a href="new-contact.html"><span class="nav-icon">➕</span> New Contact</a></li>
+        <li><a href="view-contacts.html"><span class="nav-icon">👁️</span> View All Contacts</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="hero-badge">
+        <span>✨</span> Employee Management System v1.0
+      </div>
+      <h1>
+        Manage Your Team<br/>
+        with <span class="gradient-text">Confidence</span>
+      </h1>
+      <p>
+        A powerful, intuitive platform to manage employee contacts, departments,
+        and positions — all in one place.
+      </p>
+      <div class="hero-actions">
+        <a href="new-contact.html" class="btn btn-primary btn-lg">
+          <span>➕</span> Add New Employee
+        </a>
+        <a href="view-contacts.html" class="btn btn-secondary btn-lg">
+          <span>📋</span> View All Contacts
+        </a>
+      </div>
+    </section>
+
+    <!-- STATS DASHBOARD -->
+    <div class="stats-grid">
+      <div class="stat-card blue">
+        <div class="stat-icon">👥</div>
+        <div class="stat-info">
+          <h3 id="totalEmployees">8</h3>
+          <p>Total Employees</p>
+        </div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-icon">🏢</div>
+        <div class="stat-info">
+          <h3>5</h3>
+          <p>Departments</p>
+        </div>
+      </div>
+      <div class="stat-card amber">
+        <div class="stat-icon">💼</div>
+        <div class="stat-info">
+          <h3>7</h3>
+          <p>Positions</p>
+        </div>
+      </div>
+      <div class="stat-card purple">
+        <div class="stat-icon">✅</div>
+        <div class="stat-info">
+          <h3>8</h3>
+          <p>Active Staff</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURES SECTION -->
+    <h2 class="section-title">🚀 Quick Actions</h2>
+    <div class="features-grid">
+      <a href="new-contact.html" class="feature-card">
+        <div class="feature-icon">➕</div>
+        <h3>Add New Employee</h3>
+        <p>Register a new employee with full contact details including name, department, position, and contact information.</p>
+        <span class="feature-link">Get started →</span>
+      </a>
+      <a href="view-contacts.html" class="feature-card">
+        <div class="feature-icon">📋</div>
+        <h3>View All Contacts</h3>
+        <p>Browse and manage your entire employee directory. View details, edit records, or remove employees from the system.</p>
+        <span class="feature-link">Browse contacts →</span>
+      </a>
+      <div class="feature-card" style="cursor:default;">
+        <div class="feature-icon">📊</div>
+        <h3>Department Overview</h3>
+        <p>Quickly see which departments are active and how many employees are assigned to each team across the organization.</p>
+        <span class="feature-link" style="color:var(--gray);">Coming soon</span>
+      </div>
+    </div>
+
+    <!-- WELCOME NOTE -->
+    <h2 class="section-title">📌 About This System</h2>
+    <div style="background:var(--white); border-radius:var(--radius-lg); padding:28px 32px; box-shadow:var(--shadow); border:1px solid var(--border); display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap;">
+      <div style="font-size:48px; flex-shrink:0;">🏛️</div>
+      <div>
+        <h3 style="font-size:18px; font-weight:700; color:var(--dark); margin-bottom:8px;">Employee Management System</h3>
+        <p style="color:var(--gray); font-size:14px; line-height:1.8; max-width:680px;">
+          Welcome to the <strong>Employee Management System</strong> — a lightweight web application built with
+          HTML, CSS, and JavaScript. This system allows HR staff and administrators to manage employee
+          contact records efficiently. Use the navigation bar above to add new contacts or browse the
+          full employee directory. All data is stored locally in your browser for a seamless offline experience.
+        </p>
+        <div style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap;">
+          <span class="badge badge-primary">HTML5</span>
+          <span class="badge badge-success">CSS3</span>
+          <span class="badge badge-warning">JavaScript</span>
+          <span class="badge badge-primary">LocalStorage</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 <span>Employee Management System</span>. Built with HTML, CSS &amp; JavaScript.</p>
+  </footer>
+
+  <script src="main.js"></script>
+  <script>
+    // Update total count from localStorage
+    const employees = JSON.parse(localStorage.getItem('employees') || '[]');
+    const defaultCount = 8;
+    document.getElementById('totalEmployees').textContent = employees.length > 0 ? employees.length + defaultCount : defaultCount;
+  </script>
+</body>
+</html>

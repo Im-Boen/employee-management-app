@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add New Contact — Employee Management System</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👥</text></svg>" />
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-brand">
+        <div class="brand-icon">👥</div>
+        <div class="brand-text">
+          <span class="brand-title">EMS</span>
+          <span class="brand-sub">Management System</span>
+        </div>
+      </a>
+
+      <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="navbar-links" id="navLinks">
+        <li><a href="index.html"><span class="nav-icon">🏠</span> Home</a></li>
+        <li><a href="new-contact.html" class="active"><span class="nav-icon">➕</span> New Contact</a></li>
+        <li><a href="view-contacts.html"><span class="nav-icon">👁️</span> View All Contacts</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main>
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <div class="breadcrumb">
+        <a href="index.html">🏠 Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <span>New Contact</span>
+      </div>
+      <h1>Add New Employee</h1>
+      <p>Fill in the form below to register a new employee in the system.</p>
+    </div>
+
+    <!-- FORM CARD -->
+    <div class="form-card">
+
+      <div class="form-card-header">
+        <div class="form-card-header-icon">📋</div>
+        <div>
+          <h2>New Employee Registration</h2>
+          <p>All fields marked with <span style="color:#f87171">*</span> are required</p>
+        </div>
+      </div>
+
+      <form id="newContactForm" novalidate>
+        <div class="form-body">
+
+          <!-- PERSONAL INFORMATION -->
+          <div class="form-section">
+            <div class="form-section-title">👤 Personal Information</div>
+            <div class="form-grid">
+
+              <div class="form-group">
+                <label for="idNumber">🪪 ID Number <span class="required">*</span></label>
+                <input type="text" id="idNumber" name="idNumber" placeholder="Enter national ID number" required />
+              </div>
+
+              <div class="form-group">
+                <label for="firstName">First Name <span class="required">*</span></label>
+                <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required />
+              </div>
+
+              <div class="form-group">
+                <label for="lastName">Last Name <span class="required">*</span></label>
+                <input type="text" id="lastName" name="lastName" placeholder="Enter last name" required />
+              </div>
+
+              <div class="form-group">
+                <label for="dob">📅 Date of Birth <span class="required">*</span></label>
+                <input type="date" id="dob" name="dob" required />
+              </div>
+
+              <div class="form-group full">
+                <label>⚧ Gender <span class="required">*</span></label>
+                <div class="radio-group">
+                  <label class="radio-option">
+                    <input type="radio" name="gender" value="Male" required /> Male
+                  </label>
+                  <label class="radio-option">
+                    <input type="radio" name="gender" value="Female" /> Female
+                  </label>
+                  <label class="radio-option">
+                    <input type="radio" name="gender" value="Other" /> Other
+                  </label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- CONTACT INFORMATION -->
+          <div class="form-section">
+            <div class="form-section-title">📞 Contact Information</div>
+            <div class="form-grid">
+
+              <div class="form-group">
+                <label for="email">📧 Email Address <span class="required">*</span></label>
+                <input type="email" id="email" name="email" placeholder="employee@company.com" required />
+              </div>
+
+              <div class="form-group">
+                <label for="phone">📱 Phone Number <span class="required">*</span></label>
+                <input type="tel" id="phone" name="phone" placeholder="+254 7XX XXX XXX" required />
+              </div>
+
+              <div class="form-group full">
+                <label for="address">🏠 Physical Address</label>
+                <input type="text" id="address" name="address" placeholder="Enter residential address" />
+              </div>
+
+            </div>
+          </div>
+
+          <!-- JOB INFORMATION -->
+          <div class="form-section">
+            <div class="form-section-title">💼 Job Information</div>
+            <div class="form-grid">
+
+              <div class="form-group">
+                <label for="department">🏢 Department <span class="required">*</span></label>
+                <select id="department" name="department" required>
+                  <option value="" disabled selected>— Select Department —</option>
+                  <option value="Human Resources">Human Resources</option>
+                  <option value="Information Technology">Information Technology</option>
+                  <option value="Finance & Accounts">Finance &amp; Accounts</option>
+                  <option value="Marketing">Marketing</option>
+                  <option value="Operations">Operations</option>
+                  <option value="Legal">Legal</option>
+                  <option value="Customer Service">Customer Service</option>
+                  <option value="Administration">Administration</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="position">💼 Position <span class="required">*</span></label>
+                <select id="position" name="position" required>
+                  <option value="" disabled selected>— Select Position —</option>
+                  <option value="Manager">Manager</option>
+                  <option value="Senior Officer">Senior Officer</option>
+                  <option value="Officer">Officer</option>
+                  <option value="Junior Officer">Junior Officer</option>
+                  <option value="Team Lead">Team Lead</option>
+                  <option value="Director">Director</option>
+                  <option value="Analyst">Analyst</option>
+                  <option value="Intern">Intern</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="employeeNo">🔢 Employee Number</label>
+                <input type="text" id="employeeNo" name="employeeNo" placeholder="Auto-generated if left blank" />
+              </div>
+
+              <div class="form-group">
+                <label for="startDate">📅 Start Date</label>
+                <input type="date" id="startDate" name="startDate" />
+              </div>
+
+              <div class="form-group full">
+                <label for="notes">📝 Additional Notes</label>
+                <textarea id="notes" name="notes" placeholder="Any additional information about this employee..."></textarea>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- FORM FOOTER -->
+        <div class="form-footer">
+          <p class="form-footer-note">
+            🔒 All information is stored securely and locally.
+          </p>
+          <div class="form-footer-actions">
+            <button type="button" class="btn btn-secondary" onclick="resetForm()">
+              🔄 Reset Form
+            </button>
+            <button type="submit" class="btn btn-primary">
+              💾 Save Employee
+            </button>
+          </div>
+        </div>
+
+      </form>
+    </div><!-- /form-card -->
+
+  </main>
+
+  <!-- SUCCESS MODAL -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>✅ Employee Saved</h3>
+        <button class="modal-close" onclick="closeSuccessModal()">✕</button>
+      </div>
+      <div class="modal-body" style="text-align:center; padding: 32px 24px;">
+        <div style="font-size:64px; margin-bottom:16px;">🎉</div>
+        <h4 style="font-size:20px; font-weight:700; color:var(--dark); margin-bottom:8px;">Employee Added Successfully!</h4>
+        <p style="color:var(--gray); font-size:14px;" id="successMessage">The new employee has been registered in the system.</p>
+      </div>
+      <div class="modal-footer" style="justify-content:center; gap:12px;">
+        <button class="btn btn-secondary" onclick="closeSuccessModal()">Add Another</button>
+        <a href="view-contacts.html" class="btn btn-primary">View All Contacts →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST CONTAINER -->
+  <div id="toast-container"></div>
+
+  <script src="main.js"></script>
+  <script>
+    const form = document.getElementById('newContactForm');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Basic validation
+      const required = form.querySelectorAll('[required]');
+      let valid = true;
+
+      required.forEach(field => {
+        if (field.type === 'radio') return; // handled separately
+        if (!field.value.trim()) {
+          field.style.borderColor = 'var(--danger)';
+          field.style.boxShadow = '0 0 0 3px rgba(239,68,68,0.15)';
+          valid = false;
+        } else {
+          field.style.borderColor = '';
+          field.style.boxShadow = '';
+        }
+      });
+
+      // Check gender radio
+      const genderSelected = form.querySelector('input[name="gender"]:checked');
+      if (!genderSelected) {
+        valid = false;
+        showToast('error', 'Missing Field', 'Please select a gender.');
+        return;
+      }
+
+      if (!valid) {
+        showToast('error', 'Validation Error', 'Please fill in all required fields.');
+        return;
+      }
+
+      // Build employee object
+      const employee = {
+        id: Date.now(),
+        idNumber: document.getElementById('idNumber').value.trim(),
+        firstName: document.getElementById('firstName').value.trim(),
+        lastName: document.getElementById('lastName').value.trim(),
+        fullName: document.getElementById('firstName').value.trim() + ' ' + document.getElementById('lastName').value.trim(),
+        dob: document.getElementById('dob').value,
+        gender: genderSelected.value,
+        email: document.getElementById('email').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        address: document.getElementById('address').value.trim(),
+        department: document.getElementById('department').value,
+        position: document.getElementById('position').value,
+        employeeNo: document.getElementById('employeeNo').value.trim() || 'EMP-' + String(Date.now()).slice(-5),
+        startDate: document.getElementById('startDate').value,
+        notes: document.getElementById('notes').value.trim(),
+        status: 'Active'
+      };
+
+      // Save to localStorage
+      const employees = JSON.parse(localStorage.getItem('employees') || '[]');
+      employees.push(employee);
+      localStorage.setItem('employees', JSON.stringify(employees));
+
+      document.getElementById('successMessage').textContent =
+        `${employee.fullName} has been successfully registered as ${employee.position} in ${employee.department}.`;
+
+      document.getElementById('successModal').classList.add('show');
+      form.reset();
+    });
+
+    // Live validation feedback
+    form.querySelectorAll('input, select, textarea').forEach(field => {
+      field.addEventListener('input', function () {
+        if (this.value.trim()) {
+          this.style.borderColor = '';
+          this.style.boxShadow = '';
+        }
+      });
+    });
+
+    function resetForm() {
+      form.reset();
+      form.querySelectorAll('input, select, textarea').forEach(f => {
+        f.style.borderColor = '';
+        f.style.boxShadow = '';
+      });
+      showToast('warning', 'Form Reset', 'All fields have been cleared.');
+    }
+
+    function closeSuccessModal() {
+      document.getElementById('successModal').classList.remove('show');
+    }
+  </script>
+</body>
+</html>
